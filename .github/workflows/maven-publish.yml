@@ -19,118 +19,112 @@ env:
   testvar: value-1
 jobs:
   # Only one single job called build
-  build:
+  # build:
 
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: read
+  #     packages: write
 
-    steps:
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    # Checkout code
-    - uses: actions/checkout@v3
+  #   steps:
+  #   # Steps represent a sequence of tasks that will be executed as part of the job
+  #   # Checkout code
+  #   - uses: actions/checkout@v3
     
-    - name: Run a one-line script
-      run: echo Hello world!
+  #   - name: Run a one-line script
+  #     run: echo Hello world!
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        server-id: main # Value of the distributionManagement/repository/id field of the pom.xml
-        settings-path: ${{ github.workspace }} # location for the settings.xml file
+  #   - name: Set up JDK 17
+  #     uses: actions/setup-java@v3
+  #     with:
+  #       java-version: '17'
+  #       distribution: 'temurin'
+  #       server-id: main # Value of the distributionManagement/repository/id field of the pom.xml
+  #       settings-path: ${{ github.workspace }} # location for the settings.xml file
 
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
-  build-db:
-    needs: build
-    runs-on: windows-latest
-    steps:
-      - run: echo "Hello Windows"
-  package:
-    needs: [build, build-db]
-    runs-on: macos-latest
-    steps:
-      - run: echo "Hello macos today is ${{env.DAY_OF_WEEK}}"
-  env-test-api:
-    runs-on: macos-latest
-    steps:
-      # step 1: test env set globally
-      - run: echo "Hello API var is ${{ env.testvar }}"
+  #   - name: Build with Maven
+  #     run: mvn -B package --file pom.xml
+  # build-db:
+  #   needs: build
+  #   runs-on: windows-latest
+  #   steps:
+  #     - run: echo "Hello Windows"
+  # package:
+  #   needs: [build, build-db]
+  #   runs-on: macos-latest
+  #   steps:
+  #     - run: echo "Hello macos today is ${{env.DAY_OF_WEEK}}"
+  # env-test-api:
+  #   runs-on: macos-latest
+  #   steps:
+  #     # step 1: test env set globally
+  #     - run: echo "Hello API var is ${{ env.testvar }}"
 
-      # step 2: set value into variable for further get
-      - name: set-variable
-        id: step-1
-        run: |
-          echo "action_state=yello" >> $GITHUB_ENV
-          echo "MY_SECRET: ${{ secrets.USER_NAME }}"
+  #     # step 2: set value into variable for further get
+  #     - name: set-variable
+  #       id: step-1
+  #       run: |
+  #         echo "action_state=yello" >> $GITHUB_ENV
+  #         echo "MY_SECRET: ${{ secrets.USER_NAME }}"
       
-      # step 3: get value out of the variable from step 2
-      - name: get-variable
-        id: step-2
-        # get the variable seted in step1
-        run: echo "${{ env.action_state }}" has been set
+  #     # step 3: get value out of the variable from step 2
+  #     - name: get-variable
+  #       id: step-2
+  #       # get the variable seted in step1
+  #       run: echo "${{ env.action_state }}" has been set
       
-      # step 4: print all the default variables
-      - name: default-variables
-        run: env
-      # step 5: print one of the default variables
-      - name: print-default-variables
-        run: |
-          echo "$JAVA_HOME_8_X64"
+  #     # step 4: print all the default variables
+  #     - name: default-variables
+  #       run: env
+  #     # step 5: print one of the default variables
+  #     - name: print-default-variables
+  #       run: |
+  #         echo "$JAVA_HOME_8_X64"
       
-      # step 6: get secrect variables 
-      - name: print-secret
-        run: |
-          echo "MY_SET_USER_NAME: $MY_SET_USER_NAME"
-        env:
-          MY_SET_USER_NAME: ${{ secrets.USER_NAME }} # this will print **** in github
-  # upload artifact in one job and download artifact in another job
-  uploadArtifact:
-    runs-on: ubuntu-latest
-    steps:
-      - name: create-local-file
-        run: echo "Hi this is it" > file.txt
-      - name: upload-file
-        uses: actions/upload-artifact@v2
-        with:
-          name: file
-          path: file.txt
-  downloadArtifact:
-    runs-on: ubuntu-latest
-    needs: ["uploadArtifact"]
-    steps:
-      - name: download-file
-        uses: actions/download-artifact@v2
-        with:
-          name: file
+  #     # step 6: get secrect variables 
+  #     - name: print-secret
+  #       run: |
+  #         echo "MY_SET_USER_NAME: $MY_SET_USER_NAME"
+  #       env:
+  #         MY_SET_USER_NAME: ${{ secrets.USER_NAME }} # this will print **** in github
+  # # upload artifact in one job and download artifact in another job
+  # uploadArtifact:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: create-local-file
+  #       run: echo "Hi this is it" > file.txt
+  #     - name: upload-file
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: file
+  #         path: file.txt
+  # downloadArtifact:
+  #   runs-on: ubuntu-latest
+  #   needs: ["uploadArtifact"]
+  #   steps:
+  #     - name: download-file
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: file
       
-      - run: cat file.txt
-  # test environment
-  environmentTest:
-    runs-on: ubuntu-latest
-    environment:
-      name: PRODUCTION
-      url: https://github.com
-    steps:
-      - name: "print secrect and variables"
-        run: |
-          echo "APP_SECRET: ${{ secrets.USER_NAME }}"
-          echo "APP_VARIABLE : ${{ vars.VAR_NAME_1 }}"
+  #     - run: cat file.txt
+  # # test environment
+  # environmentTest:
+  #   runs-on: ubuntu-latest
+  #   environment:
+  #     name: PRODUCTION
+  #     url: https://github.com
+  #   steps:
+  #     - name: "print secrect and variables"
+  #       run: |
+  #         echo "APP_SECRET: ${{ secrets.USER_NAME }}"
+  #         echo "APP_VARIABLE : ${{ vars.VAR_NAME_1 }}"
   
-  # test sharing variables between steps
-  # 1. echo "variableName=variable_value" >> $GITHUB_ENV
-
-  # 2. Set value  echo "::set-output name=var1_name::TestVar1_Value"
-  pass-variable-between-steps:
-    runs-on: ubuntu-latest
+  # self hosted run
+  selfHostedTest:
+    runs-on: [self-hosted, macOS, X64, gpu]
     steps:
-      - name: "set variable"
-        id: var_set_step
-        run: |
-          echo "myVariableName=$(date+'%Y-%m-%d-%H-%M')" >> $GITHUB_ENV
-      - name: "get variable"
-        run: |
-          echo "The Env variable: ${{ env.myVariableName }}"
+      - name: run-on-self-hosted
+        run: echo "Hello world"
+      - name: sleep for a while
+        run: sleep 100
