@@ -60,7 +60,11 @@ jobs:
       - run: echo "Hello API var is ${{ env.testvar }}"
       - name: set-variable
         id: step-1
+        # set variable into action_state in step 1
         run: echo "action_state=yello" >> $GITHUB_ENV
       - name: get-variable
         id: step-2
+        # get the variable seted in step1
         run: echo "${{ env.action_state }}" has been set
+      - name: default-variables
+        run: env
