@@ -108,7 +108,6 @@ jobs:
           name: file
       
       - run: cat file.txt
-
   # test environment
   environmentTest:
     runs-on: ubuntu-latest
@@ -120,3 +119,20 @@ jobs:
         run: |
           echo "APP_SECRET: ${{ secrets.USER_NAME }}"
           echo "APP_VARIABLE : ${{ vars.VAR_NAME_1 }}"
+  
+  # test sharing variables between steps
+  # 1. echo "variableName=variable_value" >> $GITHUB_ENV
+
+  # 2. Set value  echo "::set-output name=var1_name::TestVar1_Value"
+  pass-variable-between-steps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "set variable"
+        id: var_set_step
+        run: |
+          echo "myVariableName=0123456789" >> $GITHUB_ENV
+          echo "::set-output name=var1_name::$(date+'%Y-%m-%d-%H-%M')"
+      - name: "get variable"
+        run: |
+          echo "The Env variable: ${{ env.myVariableName }}"
+          echo "The Step variable: ${{ steps.var_set_step.var1_name }}"
