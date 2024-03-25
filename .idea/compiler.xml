@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <excludeFromCompile>
+      <directory url="file://$PROJECT_DIR$/src/main/resources/archetype-resources" includeSubdirectories="true" />
+    </excludeFromCompile>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="my-spring-autoconfig" />
+        <module name="main" />
+        <module name="my-spring-impl" />
+        <module name="my-spring-starter" />
+        <module name="my-spring-jakata-autoconfig" />
+        <module name="my-spring-api" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="spring-feature" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="main" options="-parameters" />
+      <module name="my-spring-api" options="-parameters" />
+      <module name="my-spring-autoconfig" options="-parameters" />
+      <module name="my-spring-impl" options="-parameters" />
+      <module name="my-spring-jakata-autoconfig" options="-parameters" />
+      <module name="my-spring-starter" options="-parameters" />
+      <module name="spring-feature" options="-parameters" />
+    </option>
+  </component>
+</project>

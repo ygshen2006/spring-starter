@@ -1,0 +1,5 @@
+com.oreily.spring.feature.MyTestDynamicFeature
+com.oreily.spring.filter.MyFilter
+com.oreily.spring.model.ResourceMethodConfig
+com.oreily.spring.provider.DefaultItemIdSourceProvider
+com.oreily.spring.provider.DescriptionItemIdSourceProvider
