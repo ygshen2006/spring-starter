@@ -43,3 +43,13 @@ jobs:
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+  build-db:
+    needs: build
+    runs-on: windows-latest
+    steps:
+      - run: echo "Hello Windows"
+  package:
+    needs: [build, build-db]
+    runs-on: macos-latest
+    steps:
+      - run: echo "Hello macos"
