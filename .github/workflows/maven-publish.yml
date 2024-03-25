@@ -57,18 +57,33 @@ jobs:
   build-api:
     runs-on: macos-latest
     steps:
+      # step 1: test env set globally
       - run: echo "Hello API var is ${{ env.testvar }}"
+
+      # step 2: set value into variable for further get
       - name: set-variable
         id: step-1
-        # set variable into action_state in step 1
-        run: echo "action_state=yello" >> $GITHUB_ENV
+        run: |
+          echo "action_state=yello" >> $GITHUB_ENV
+          echo "MY_SECRET: ${{ secrets.USER_NAME }}"
+      
+      # step 3: get value out of the variable from step 2
       - name: get-variable
         id: step-2
         # get the variable seted in step1
         run: echo "${{ env.action_state }}" has been set
+      
+      # step 4: print all the default variables
       - name: default-variables
         run: env
+      # step 5: print one of the default variables
       - name: print-default-variables
         run: |
           echo "$JAVA_HOME_8_X64"
-          echo "${{ secrets.user_name }}"
+      
+      # step 6: get secrect variables 
+      - name: print-secret
+        run: |
+          echo "MY_SET_USER_NAME: $MY_SET_USER_NAME"
+        env:
+          MY_SET_USER_NAME: ${{ secrets.USER_NAME }}
