@@ -118,5 +118,5 @@ jobs:
     steps:
       - name: "print secrect and variables"
         run: |
-          echo "APP_SECRET: ${{ secrets.USER_NAME_2 }}"
-          echo "APP_VARIABLE : ${{ env.VAR_NAME_1 }}"
+          echo "APP_SECRET: ${{ secrets.USER_NAME }}"
+          echo "APP_VARIABLE : ${{ vars.VAR_NAME_1 }}"
