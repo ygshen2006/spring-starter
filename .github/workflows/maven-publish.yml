@@ -53,3 +53,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - run: echo "Hello macos"
+  build-api:
+    runs-on: macos-latest
+    steps:
+      - run: echo "Hello API"
