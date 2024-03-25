@@ -58,3 +58,9 @@ jobs:
     runs-on: macos-latest
     steps:
       - run: echo "Hello API var is ${{ env.testvar }}"
+      - name: set-variable
+        id: step-1
+        run: echo "action_state=yello" >> $GITHUB_ENV
+      - name: get-variable
+        id: step-2
+        run: echo "${{ env.action_state }}" has been set
