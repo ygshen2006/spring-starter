@@ -121,10 +121,10 @@ jobs:
   #         echo "APP_VARIABLE : ${{ vars.VAR_NAME_1 }}"
   
   # self hosted run
-  selfHostedTest:
-    runs-on: [self-hosted, macOS, X64, gpu]
-    steps:
-      - name: run-on-self-hosted
-        run: echo "Hello world"
-      - name: sleep for a while
-        run: sleep 100
+  # selfHostedTest:
+  #   runs-on: [self-hosted, macOS, X64, gpu]
+  #   steps:
+  #     - name: run-on-self-hosted
+  #       run: echo "Hello world"
+  #     - name: sleep for a while
+  #       run: sleep 100
