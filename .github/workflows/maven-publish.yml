@@ -68,3 +68,6 @@ jobs:
         run: echo "${{ env.action_state }}" has been set
       - name: default-variables
         run: env
+      - name: print-default-variables
+        run: |
+          echo "$JAVA_HOME_8_X64"
