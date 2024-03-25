@@ -130,9 +130,7 @@ jobs:
       - name: "set variable"
         id: var_set_step
         run: |
-          echo "myVariableName=0123456789" >> $GITHUB_ENV
-          echo "::set-output name=var1_name::$(date+'%Y-%m-%d-%H-%M')"
+          echo "myVariableName=$(date+'%Y-%m-%d-%H-%M')" >> $GITHUB_ENV
       - name: "get variable"
         run: |
           echo "The Env variable: ${{ env.myVariableName }}"
-          echo "The Step variable: ${{ steps.var_set_step.var1_name }}"
