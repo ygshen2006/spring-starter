@@ -19,31 +19,31 @@ env:
   testvar: value-1
 jobs:
   # Only one single job called build
-  # build:
+  build:
 
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: read
-  #     packages: write
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
-  #   steps:
-  #   # Steps represent a sequence of tasks that will be executed as part of the job
-  #   # Checkout code
-  #   - uses: actions/checkout@v3
+    steps:
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    # Checkout code
+    - uses: actions/checkout@v3
     
-  #   - name: Run a one-line script
-  #     run: echo Hello world!
+    - name: Run a one-line script
+      run: echo Hello world!
 
-  #   - name: Set up JDK 17
-  #     uses: actions/setup-java@v3
-  #     with:
-  #       java-version: '17'
-  #       distribution: 'temurin'
-  #       server-id: main # Value of the distributionManagement/repository/id field of the pom.xml
-  #       settings-path: ${{ github.workspace }} # location for the settings.xml file
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        server-id: main # Value of the distributionManagement/repository/id field of the pom.xml
+        settings-path: ${{ github.workspace }} # location for the settings.xml file
 
-  #   - name: Build with Maven
-  #     run: mvn -B package --file pom.xml
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
   # build-db:
   #   needs: build
   #   runs-on: windows-latest
