@@ -71,4 +71,4 @@ jobs:
       - name: print-default-variables
         run: |
           echo "$JAVA_HOME_8_X64"
-          echo "${{ env.user_name }}"
+          echo "${{ secrets.user_name }}"
