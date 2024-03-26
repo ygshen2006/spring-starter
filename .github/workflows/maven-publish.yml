@@ -46,11 +46,15 @@ jobs:
       run: |
         source ~/.zprofile
         mvn -B package --file pom.xml
-    - uses: Repositorios-Actions/copy-file-to@1.0.1
-      with:
-          work_dir:  main/target
-          file: main-0.0.1-SNAPSHOT.jar
-          to: ./main-0.0.1-SNAPSHOT.jar
+    - name: ls all files
+      run: |
+        ls -al
+        ls main/
+    # - uses: Repositorios-Actions/copy-file-to@1.0.1
+    #   with:
+    #       work_dir:  main/target
+    #       file: main-0.0.1-SNAPSHOT.jar
+    #       to: ./main-0.0.1-SNAPSHOT.jar
     - name: Run java exe
       run: |
           java -jar main-0.0.1-SNAPSHOT.jar
